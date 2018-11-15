@@ -1,32 +1,51 @@
 #include <wx/wxprec.h>
+#include <wx/utils.h>
 
 #include "System.hpp"
 
 namespace System
 {
+    void Execute(const wxString& command)
+    {
+        wxArrayString out;
+        long exitCode = wxExecute(command, out, wxEXEC_SYNC | wxEXEC_HIDE_CONSOLE);
+        wxLogMessage(wxT("Command '%s' exited with: %d / 0x%.8X"), command, exitCode, exitCode);
+
+        if (!out.IsEmpty())
+        {
+            wxLogMessage(wxT("Output:"));
+
+            for (const wxString& line : out)
+            {
+                wxLogMessage(line);
+            }
+        }
+    }
+
 #ifdef  _WINDOWS_
+    const wxString ShutdownExe = wxT("C:\\Windows\\System32\\shutdown.exe");
+    
     void Shutdown(std::chrono::seconds time)
     {
-        const std::string command = "shutdown /s /t " + std::to_string(time.count());
-        wxLogMessage(_T("%hs"), command.c_str());
-        system(command.c_str());
+        Execute(ShutdownExe + wxT(" /s /t ") + std::to_wstring(time.count()));
     }
 
     void CancelShutdown()
     {
-        system("shutdown /a");
+        Execute(ShutdownExe + wxT(" /a"));
     }
 #else
+    const wxString ShutdownExe = wxT("/sbin/shutdown");
+    
+
     void Shutdown(std::chrono::minutes time)
     {
-        const std::string command = "shutdown +" + std::to_string(time.count());
-        wxLogMessage(_T("%hs"), command.c_str());
-        system(command.c_str());
+        Execute(ShutdownExe + wxT(" +") + std::to_string(time.count()));
     }
 
     void CancelShutdown()
     {
-        system("shutdown -c");
+        Execute(ShutdownExe + wxT(" -c"));
     }
 #endif
 }

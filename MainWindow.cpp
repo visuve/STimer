@@ -8,7 +8,6 @@ namespace Styles
 {
     constexpr long Frame = wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX);
     constexpr int Border = 3;
-
 }
 
 MainWindow::MainWindow() :
@@ -17,11 +16,11 @@ MainWindow::MainWindow() :
     auto sizer = new wxBoxSizer(wxVERTICAL);
 
     {
-        auto hourSpin = new wxSpinCtrl(this, wxID_ANY, _T("HOURS"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS | wxALIGN_RIGHT, 0, 100, 0);
+        auto hourSpin = new wxSpinCtrl(this, wxID_ANY, wxT("HOURS"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS | wxALIGN_RIGHT, 0, 100, 0);
 
         hourSpin->Bind(wxEVT_SPINCTRL, [this](wxSpinEvent& e)->void
         {
-            wxLogMessage(_T("HOUR: %d"), e.GetValue());
+            wxLogMessage(wxT("HOUR: %d"), e.GetValue());
             m_hour = std::chrono::hours(e.GetValue());
         });
 
@@ -29,11 +28,11 @@ MainWindow::MainWindow() :
     }
 
     {
-        auto minuteSpin = new wxSpinCtrl(this, wxID_ANY, _T("MINUTES"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS | wxALIGN_RIGHT, 0, 60, 0);
+        auto minuteSpin = new wxSpinCtrl(this, wxID_ANY, wxT("MINUTES"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS | wxALIGN_RIGHT, 0, 60, 0);
 
         minuteSpin->Bind(wxEVT_SPINCTRL, [this](wxSpinEvent& e)->void
         {
-            wxLogMessage(_T("MINUTE: %d"), e.GetValue());
+            wxLogMessage(wxT("MINUTE: %d"), e.GetValue());
             m_minute = std::chrono::minutes(e.GetValue());
         });
 
