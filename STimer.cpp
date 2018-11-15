@@ -7,6 +7,8 @@
 
 #include "STimer.hpp"
 
+#include <chrono>
+
 IMPLEMENT_APP(ExampleApp);
 
 namespace System
@@ -38,54 +40,82 @@ namespace System
 #endif
 }
 
+class MainWindow : public wxFrame
+{
+public:
+    MainWindow() :
+        wxFrame(nullptr, wxID_ANY, wxT("SHUTDOWN TIMER"), wxDefaultPosition, wxSize(300, 180), m_frameStyle)
+    {
+        auto sizer = new wxBoxSizer(wxVERTICAL);
+
+        {
+            auto hourSpin = new wxSpinCtrl(this, wxID_ANY, _T("HOURS"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS | wxALIGN_RIGHT, 0, 100, 0);
+
+            hourSpin->Bind(wxEVT_SPINCTRL, [this](wxSpinEvent& e)->void
+            {
+                wxLogMessage(_T("HOUR: %d"), e.GetValue());
+                m_hour = std::chrono::hours(e.GetValue());
+            });
+
+            sizer->Add(hourSpin, 1, wxEXPAND | wxALL, m_border);
+        }
+
+        {
+            long style = wxSP_ARROW_KEYS | wxALIGN_RIGHT;
+
+            auto minuteSpin = new wxSpinCtrl(this, wxID_ANY, _T("MINUTES"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS | wxALIGN_RIGHT, 0, 60, 0);
+
+            minuteSpin->Bind(wxEVT_SPINCTRL, [this](wxSpinEvent& e)->void
+            {
+                wxLogMessage(_T("MINUTE: %d"), e.GetValue());
+                m_minute = std::chrono::minutes(e.GetValue());
+            });
+
+            sizer->Add(minuteSpin, 1, wxEXPAND | wxALL, m_border);
+        }
+
+        {
+            auto shutdownButton = new wxButton(this, wxID_ANY, wxT("INIT SHUTDOWN"));
+
+            shutdownButton->Bind(wxEVT_BUTTON, [this](wxCommandEvent&)->void
+            {
+                System::Shutdown(m_hour + m_minute);
+            });
+
+            sizer->Add(shutdownButton, 1, wxEXPAND | wxALL, m_border);
+        }
+
+        {
+            auto cancelButton = new wxButton(this, wxID_ANY, wxT("ABORT SHUTDOWN"));
+
+            cancelButton->Bind(wxEVT_BUTTON, [](wxCommandEvent&)->void
+            {
+                System::CancelShutdown();
+            });
+
+            sizer->Add(cancelButton, 1, wxEXPAND | wxALL, m_border);
+        }
+
+        SetSizer(sizer);
+    }
+
+private:
+    static constexpr long m_frameStyle = wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX);
+    static constexpr int m_border = 3;
+
+    std::chrono::hours m_hour = std::chrono::hours(0);
+    std::chrono::minutes m_minute = std::chrono::minutes(0);
+};
+
 bool ExampleApp::OnInit()
 {
     wxLog::SetActiveTarget(new wxLogStderr());
 
-    long style = wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX);
-    auto frame = new wxFrame(nullptr, wxID_ANY, wxT("SHUTDOWN TIMER"), wxDefaultPosition, wxSize(300, 180), style);
-    
-    {
-        auto hourSpin = new wxSpinCtrl(frame, wxID_ANY, _T("HOURS"), wxPoint(20, 5), wxSize(240, 25), wxSP_ARROW_KEYS | wxALIGN_RIGHT, 0, 100, 0);
+    auto window = new MainWindow();
+    window->Show(true);
+    window->CenterOnScreen();
 
-        hourSpin->Bind(wxEVT_SPINCTRL, [this](wxSpinEvent& e)->void
-        {
-            wxLogMessage(_T("HOUR: %d"), e.GetValue());
-            m_hour = std::chrono::hours(e.GetValue());
-        });
-    }
+    SetTopWindow(window);
 
-    {
-        auto minuteSpin = new wxSpinCtrl(frame, wxID_ANY, _T("MINUTES"), wxPoint(20, 35), wxSize(240, 25), wxSP_ARROW_KEYS | wxALIGN_RIGHT, 0, 60, 0);
-
-        minuteSpin->Bind(wxEVT_SPINCTRL, [this](wxSpinEvent& e)->void
-        {
-            wxLogMessage(_T("MINUTE: %d"), e.GetValue());
-            m_minute = std::chrono::minutes(e.GetValue());
-        });
-    }
-
-    {
-        auto shutdownButton = new wxButton(frame, wxID_ANY, wxT("INIT SHUTDOWN"), wxPoint(20, 75), wxSize(240, 25));
-
-        shutdownButton->Bind(wxEVT_BUTTON, [this](wxCommandEvent&)->void
-        {
-            System::Shutdown(m_hour + m_minute);
-        });
-    }
-
-    {
-        auto cancelButton = new wxButton(frame, wxID_ANY, wxT("ABORT SHUTDOWN"), wxPoint(20, 105), wxSize(240, 25));
-
-        cancelButton->Bind(wxEVT_BUTTON, [](wxCommandEvent&)->void
-        {
-            System::CancelShutdown();
-        });
-    }
-
-    frame->Show(true);
-    frame->CenterOnScreen();
-
-    SetTopWindow(frame);
     return true;
 }
