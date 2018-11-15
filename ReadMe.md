@@ -12,4 +12,4 @@ Features:
 - WxWidgets 3.0.4
   - https://www.wxwidgets.org/downloads/
 
-- Environment variable ``WX_ROOT`` pointing to your WxWidgets root WITH a backslash
+- Environment variable ``WX_ROOT`` pointing to your WxWidgets root
