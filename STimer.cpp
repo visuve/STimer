@@ -61,8 +61,6 @@ public:
         }
 
         {
-            long style = wxSP_ARROW_KEYS | wxALIGN_RIGHT;
-
             auto minuteSpin = new wxSpinCtrl(this, wxID_ANY, _T("MINUTES"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS | wxALIGN_RIGHT, 0, 60, 0);
 
             minuteSpin->Bind(wxEVT_SPINCTRL, [this](wxSpinEvent& e)->void
