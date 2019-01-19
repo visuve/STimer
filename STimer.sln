@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "STimer", "STimer.vcxproj", "{F8E23E7F-7B09-4F73-A303-72F016EA84AB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "STimer", "STimer\STimer.vcxproj", "{F8E23E7F-7B09-4F73-A303-72F016EA84AB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7DFE1B16-515E-4B06-9D4B-9D5AFBD89F83}"
 	ProjectSection(SolutionItems) = preProject
