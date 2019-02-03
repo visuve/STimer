@@ -6,12 +6,12 @@
 
 namespace Styles
 {
-    constexpr long Frame = wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX);
+    constexpr long Frame = wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX | wxMINIMIZE_BOX);
     constexpr int Border = 3;
 }
 
 MainWindow::MainWindow() :
-    wxFrame(nullptr, wxID_ANY, wxT("SHUTDOWN TIMER"), wxDefaultPosition, wxSize(300, 180), Styles::Frame)
+    wxFrame(nullptr, wxID_ANY, wxT("SHUTDOWN TIMER"), wxDefaultPosition, wxSize(200, 200), Styles::Frame)
 {
     auto sizer = new wxBoxSizer(wxVERTICAL);
 
