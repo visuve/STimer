@@ -1,0 +1,1 @@
+﻿#define IDI_STIMER_ICON 101
