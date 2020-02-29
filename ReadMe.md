@@ -8,8 +8,8 @@ Features:
 
 ## Prerequisites
 
-- Visual Studio 2017
-- WxWidgets 3.0.4
+- Visual Studio 2019
+- WxWidgets 3.1.*
   - https://www.wxwidgets.org/downloads/
 
 - Environment variable `WX_ROOT` pointing to your WxWidgets root
