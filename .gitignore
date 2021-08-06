@@ -1,6 +1,4 @@
-bin/
-obj/
+out/
 .vs/
-*.opensdf
-*.sdf
 *.user
+CMakeSettings.json

@@ -8,8 +8,6 @@ Features:
 
 ## Prerequisites
 
-- Visual Studio 2019
-- WxWidgets 3.1.*
-  - https://www.wxwidgets.org/downloads/
-
-- Environment variable `WX_ROOT` pointing to your WxWidgets root
+- Visual Studio 2019, GCC or Clang
+- libgtk-3-dev on Linux
+  - https://wiki.wxwidgets.org/Compiling_and_getting_started

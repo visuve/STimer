@@ -1,5 +1,8 @@
 #include <wx/wxprec.h>
+#include <wx/button.h>
+#include <wx/sizer.h>
 #include <wx/spinctrl.h>
+#include <wx/log.h>
 
 #include "MainWindow.hpp"
 #include "System.hpp"

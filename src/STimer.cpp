@@ -1,10 +1,10 @@
 #include <wx/wxprec.h>
 
 #include "STimer.hpp"
-#include "STimer.xpm"
+#include "../res/STimer.xpm"
 #include "MainWindow.hpp"
 
-IMPLEMENT_APP(ExampleApp);
+wxIMPLEMENT_APP(ExampleApp);
 
 bool ExampleApp::OnInit()
 {
