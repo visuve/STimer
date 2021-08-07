@@ -10,7 +10,7 @@ namespace System
     {
         wxArrayString out;
         long exitCode = wxExecute(command, out, wxEXEC_SYNC | wxEXEC_HIDE_CONSOLE);
-        wxLogMessage(wxT("Command '%s' exited with: %d / 0x%.8X"), command, exitCode, exitCode);
+        wxLogMessage(wxT("Command '%s' exited with: %ld / 0x%.8lX"), command, exitCode, exitCode);
 
         if (!out.IsEmpty())
         {
