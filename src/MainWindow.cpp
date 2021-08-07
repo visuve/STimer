@@ -1,9 +1,4 @@
-#include <wx/wxprec.h>
-#include <wx/button.h>
-#include <wx/sizer.h>
-#include <wx/spinctrl.h>
-#include <wx/log.h>
-
+#include "PCH.hpp"
 #include "MainWindow.hpp"
 #include "System.hpp"
 
@@ -24,7 +19,7 @@ MainWindow::MainWindow() :
         hourSpin->Bind(wxEVT_SPINCTRL, [this](wxSpinEvent& e)->void
         {
             wxLogMessage(wxT("HOUR: %d"), e.GetValue());
-            m_hour = std::chrono::hours(e.GetValue());
+            _hour = std::chrono::hours(e.GetValue());
         });
 
         sizer->Add(hourSpin, 1, wxEXPAND | wxALL, Styles::Border);
@@ -36,7 +31,7 @@ MainWindow::MainWindow() :
         minuteSpin->Bind(wxEVT_SPINCTRL, [this](wxSpinEvent& e)->void
         {
             wxLogMessage(wxT("MINUTE: %d"), e.GetValue());
-            m_minute = std::chrono::minutes(e.GetValue());
+            _minute = std::chrono::minutes(e.GetValue());
         });
 
         sizer->Add(minuteSpin, 1, wxEXPAND | wxALL, Styles::Border);
@@ -47,7 +42,7 @@ MainWindow::MainWindow() :
 
         shutdownButton->Bind(wxEVT_BUTTON, [this](wxCommandEvent&)->void
         {
-            System::Shutdown(m_hour + m_minute);
+            System::Shutdown(_hour + _minute);
         });
 
         sizer->Add(shutdownButton, 1, wxEXPAND | wxALL, Styles::Border);

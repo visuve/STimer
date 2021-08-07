@@ -1,7 +1,4 @@
-#include <wx/wxprec.h>
-#include <wx/utils.h>
-#include <wx/log.h>
-
+#include "PCH.hpp"
 #include "System.hpp"
 
 namespace System

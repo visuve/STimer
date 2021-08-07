@@ -1,8 +1,7 @@
-#include <wx/wxprec.h>
-
+#include "PCH.hpp"
 #include "STimer.hpp"
-#include "../res/STimer.xpm"
 #include "MainWindow.hpp"
+#include "../res/STimer.xpm"
 
 wxIMPLEMENT_APP(ExampleApp);
 

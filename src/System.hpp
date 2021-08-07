@@ -1,7 +1,5 @@
 #pragma once
 
-#include <chrono>
-
 namespace System
 {
     void Execute(const wxString& command);
