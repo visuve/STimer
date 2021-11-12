@@ -3,9 +3,9 @@
 class MainWindow : public wxFrame
 {
 public:
-    MainWindow();
+	MainWindow();
 
 private:
-    std::chrono::hours _hour = std::chrono::hours(0);
-    std::chrono::minutes _minute = std::chrono::minutes(0);
+	std::chrono::hours _hour = std::chrono::hours(0);
+	std::chrono::minutes _minute = std::chrono::minutes(0);
 };

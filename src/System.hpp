@@ -2,12 +2,12 @@
 
 namespace System
 {
-    void Execute(const wxString& command);
+void Execute(const wxString& command);
 
 #ifdef _WINDOWS_
-    void Shutdown(std::chrono::seconds);
+void Shutdown(std::chrono::seconds);
 #else
-    void Shutdown(std::chrono::minutes);
+void Shutdown(std::chrono::minutes);
 #endif
-    void CancelShutdown();
+void CancelShutdown();
 };

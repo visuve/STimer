@@ -3,5 +3,5 @@
 class ExampleApp : public wxApp
 {
 public:
-    virtual bool OnInit();
+	virtual bool OnInit();
 };
