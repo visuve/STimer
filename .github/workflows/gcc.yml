@@ -4,24 +4,21 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Checkout submodules
-      uses: textbook/git-checkout-submodule-action@master
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
 
     - name: Install tools
       run: |
         sudo apt update
-        sudo apt --yes install clang-11 cmake ninja-build
+        sudo apt --yes install clang cmake ninja-build
         sudo apt --yes install libgtk-3-dev
 
     - name: Build
       run: |
         mkdir out
         cd out
-        export CC=/usr/bin/gcc-10
-        export CXX=/usr/bin/g++-10
-        cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug ..
+        cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DwxUSE_OPENGL=0 ..
         ninja
